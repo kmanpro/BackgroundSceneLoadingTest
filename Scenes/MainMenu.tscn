@@ -105,4 +105,3 @@ mix_target = 0
 bus = "Master"
 _sections_unfolded = [ "stream" ]
 
-[connection signal="button_down" from="MainMenu/PlayButton" to="MainMenu/PlayButton" method="_on_PlayButton_button_down"]

@@ -71,7 +71,6 @@ func goto_scene(path):
 	call_deferred("_deferred_goto_scene", path)
 
 func _deferred_goto_scene(path):
-	OS.delay_usec(16000*4) # wait 1 frame
 	thread.start(self, "prep_scene", path) 
 	
 func prep_scene(path):
@@ -84,7 +83,10 @@ func _on_load_level_done():
 	var level_res = thread.wait_to_finish()
 	current_scene.queue_free()
 	current_scene = level_res.instance()
+	var b4Tick = OS.get_ticks_msec()
 	get_tree().get_root().add_child(current_scene)
+	var afterTick = OS.get_ticks_msec() - b4Tick
+	print("ticks taken: " + str(afterTick))
 	get_tree().set_current_scene(current_scene)
 	changeGameState(RUNNING)
 
